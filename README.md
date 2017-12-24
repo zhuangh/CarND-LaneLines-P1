@@ -79,8 +79,7 @@ The reason is that gray scaled image is not accurate enough to get the lanes in 
 
 Step 2 and 3 are directly applied from Udacity course so far before the Project 1 assignment. 
 
-
-Original image
+Original image of "solidYellowCurve"
 ![alt text][imageyc] 
 
 Edge detection RGB image
@@ -89,23 +88,38 @@ Edge detection RGB image
 From HSL image
 ![alt text][imageyc_hsl]
 
-The HSL image can detect left lanes well. Another challenging image, 
+The HSL image can detect left lanes well. Another image from the challenge.mp4, 
 
 Original image
 ![alt text][image12] 
 Edge detection RGB image
+
 ![alt text][image11]
+
 From HSL image
 ![alt text][image10]
 
 
-#### 4. In order to draw a single line on the left and right lanes, I calculate the slope of each line segments. Based on the slope, we separate them into the category of left or right lane.
+#### 4. In order to draw a single line on the left and right lanes, I calculate the slope of each line segments. Based on the slope, we separate them into the category of left or right lane. 
 
+For more robust detection, I remove the outliers, weight the lines based on the length.
+
+"SolidWhiteCurve"
 ![alt text][image2]
+
+"solidWhiteRight"
 ![alt text][image3]
+
+"SolidYellowCurve2"
 ![alt text][image4]
+
+ "SolidYellowCurve"
 ![alt text][image5]
+
+"solidYellowLeft"
 ![alt text][image6]
+
+"whiteCarLaneSwitch"
 ![alt text][image7]
 
 #### 5. Video is a sequence of images. The pipeline memorizes the images in each time step and caches the lines with a fixed size of deque data structure. I use it to weight the lanes to provide a more stable lanes. The assumption is the changes of images are continuous. 
@@ -117,11 +131,11 @@ The most recent one get larger weight. We use softmax function for this flow.
 
 The videos can be accessed via following youtube links
 
-[solidWhiteRight](https://www.youtube.com/watch?v=ew_hjAn7kec)
+[solidWhiteRight](https://youtu.be/F173u323pXQ)
 
-[solidYellowLeft](https://youtu.be/Il7Za6rPZRc)
+[solidYellowLeft](https://youtu.be/N5FaqR_urbI)
 
-[challenge](https://youtu.be/8jN73461670)
+[challenge](https://youtu.be/v0InM5qh6oM)
 
 
 ### 2. Identify potential shortcomings with your current pipeline
