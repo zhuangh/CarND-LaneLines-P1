@@ -8,6 +8,25 @@
 Project 1 Report of Udacity Self-Driving Engineer Nanodegree Term I
 
 Hao Zhuang, hao.zhuang@cs.ucsd.edu
+ 
+## Rubrics
+---
+### CRITERIA
+MEETS SPECIFICATIONS
+#### Does the pipeline for line identification take road images from a video as input and return an annotated video stream as output?
+
+The output video is an annotated version of the input video.
+
+#### Has a pipeline been implemented that uses the helper functions and / or other code to roughly identify the left and right lane lines with either line segments or solid lines? (example solution included in the repository output: raw-lines-example.mp4)
+
+In a rough sense, the left and right lane lines are accurately annotated throughout almost all of the video. Annotations can be segmented or solid lines
+
+#### Have detected line segments been filtered / averaged / extrapolated to map out the full extent of the left and right lane boundaries? (example solution included in the repository: P1_example.mp4)
+
+Has a thoughtful reflection on the project been provided in the notebook?
+
+### Reflection 
+#### Describes the current pipeline, identifies its potential shortcomings and suggests possible improvements. There is no minimum length. Writing in English is preferred but you may use any language.
 
 ## Usage
 ---
@@ -33,7 +52,14 @@ The goals / steps of this project are the following:
 [image5]: ./test_images_output/solidYellowCurve.jpg "SolidYellowCurve"
 [image6]: ./test_images_output/solidYellowLeft.jpg "solidYellowLeft"
 [image7]: ./test_images_output/whiteCarLaneSwitch.jpg "whiteCarLaneSwitch"
-
+[image8]: ./test_images_output/hsl_challenge1.jpg "hsl_chanllenge1" 
+[image9]: ./test_images_output/gray_challenge1.jpg "gray_chanllenge1" 
+[image10]: ./test_images_output/hsl_challenge.jpg "gray_chanllenge1" 
+[image11]: ./test_images_output/gray_challenge.jpg "gray_chanllenge" 
+[image12]: ./test_images_output/challenge1.jpg "chanllenge1" 
+[imageyc_hsl]: ./test_images_output/hsl_solidYellowCurve.jpg "SolidYellowCurve_HSL"
+[imageyc_gray]: ./test_images_output/gray_solidYellowCurve.jpg "SolidYellowCurve_Gray"
+[imageyc]: ./test_images/solidYellowCurve.jpg "SolidYellowCurve"
 ---
 
 ### Reflection
@@ -42,12 +68,31 @@ The goals / steps of this project are the following:
 
 My pipeline consisted of steps as follows.
 
+
+
 #### 1. I converted the images to hls and get the color regions of white and yellow to the image mask. 
 
+The reason is that gray scaled image is not accurate enough to get the lanes in different light conditions compared to HLS.
+In the color selection, we set the value ranges for white and yellow. 
 
-#### 2. To get the edges, I use Canny algorithm. 
+
+Original image
+![alt text][imageyc] 
+
+From Grayscale image
+![alt text][imageyc_gray]
+
+From HSL image
+![alt text][imageyc_hsl]
+
+The HSL image can detect left lanes well.
+
+
+#### 2. To get the edges, OpenCV Canny algorithm is used. 
 
 #### 3. Use Hough transformation with the edges to get the lines.
+
+Step 2 and 3 are directly applied from Udacity course so far before the Project 1 assignment. 
 
 #### 4. In order to draw a single line on the left and right lanes, I calculate the slope of each line segments. Based on the slope, we separate them into the category of left or right lane.
 
@@ -59,6 +104,10 @@ My pipeline consisted of steps as follows.
 ![alt text][image7]
 
 #### 5. Video is a sequence of images. The pipeline memorizes the images in each time step and caches the lines with a fixed size of deque data structure. I use it to weight the lanes to provide a more stable lanes. The assumption is the changes of images are continuous. 
+
+The weight scheme is based on a weighted scheme. For each time step (the index in the deque). 
+
+The most recent one get larger weight. We use softmax function for this flow. 
 
 
 The videos can be accessed via following youtube links
@@ -80,4 +129,5 @@ Another shortcoming could be the steepness of the road. The region of interest a
 
 ### 3. Suggest possible improvements to your pipeline
 
-A possible improvement would be to use curvature detection to get more smooth and continous the line. For steep roads, we should first need to detect the region of interests.
+
+A possible improvement would be to use curvature detection to get more smooth and continuous the line. For steep roads, we should first need to detect the region of interests.
