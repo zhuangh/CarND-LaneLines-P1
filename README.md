@@ -82,21 +82,21 @@ Step 2 and 3 are directly applied from Udacity course so far before the Project 
 Original image of "solidYellowCurve"
 ![alt text][imageyc] 
 
-Edge detection RGB image
+Edge detection via RGB color space
 ![alt text][imageyc_gray]
 
-From HSL image
+Edge detection via HSL
 ![alt text][imageyc_hsl]
 
 The HSL image can detect left lanes well. Another image from the challenge.mp4, 
 
 Original image
 ![alt text][image12] 
-Edge detection RGB image
 
+Edge detection via RGB color space
 ![alt text][image11]
 
-From HSL image
+Edge detection via HSL
 ![alt text][image10]
 
 
