@@ -1,16 +1,21 @@
 # **Finding Lane Lines on the Road** 
 
-## Writeup Template
-
-### You can use this file as a template for your writeup if you want to submit it as a markdown file. But feel free to use some other method and submit a pdf if you prefer.
+## Usage
 
 ---
+To use the pipeline via docker 
+
+```sh
+docker run -it --rm -p 8888:8888 -v `pwd`:/src udacity/carnd-term1-starter-kit P1.ipynb
+```
+
 
 **Finding Lane Lines on the Road**
 
 The goals / steps of this project are the following:
 * Make a pipeline that finds lane lines on the road
 * Reflect on your work in a written report
+
 
 
 [//]: # (Image References)
@@ -26,6 +31,8 @@ The goals / steps of this project are the following:
 My pipeline consisted of 5 steps. First, I converted the images to grayscale, then I .... 
 
 In order to draw a single line on the left and right lanes, I modified the draw_lines() function by ...
+
+Based on the slope, we can seperate the lines into left or right category
 
 If you'd like to include images to show how the pipeline works, here is how to include an image: 
 
