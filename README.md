@@ -71,7 +71,7 @@ My pipeline consisted of steps as follows.
 
 #### 1. I converted the images to hls and get the color regions of white and yellow to the image mask. 
 
-The reason is that gray scaled image is not accurate enough to get the lanes in different light conditions compared to HSL. In the color selection, we set the value ranges for white and yellow. 
+The reason is that RGB grayscaled image is not robust enough to get the lanes in different light conditions compared to HSL. In the color selection, I set the value ranges for white and yellow. 
 
 #### 2. To get the edges, OpenCV Canny algorithm is used. 
 
@@ -102,7 +102,11 @@ From HSL image
 
 #### 4. In order to draw a single line on the left and right lanes, I calculate the slope of each line segments. Based on the slope, we separate them into the category of left or right lane. 
 
-For more robust detection, I remove the outliers, weight the lines based on the length.
+For more robust detection, I filter out the too small and too large slopes, weight the lines based on the length, and remove the outliers (outstanding slopes). 
+
+For the weighting lines based on the length, the intuition is the longer the line, the better chance it is the part of lane close to the camera, which is more useful to serve as a baseline of the lane model.
+
+For outstanding slopes, we consider them outside one standard deviation.
 
 "SolidWhiteCurve"
 ![alt text][image2]
@@ -124,12 +128,7 @@ For more robust detection, I remove the outliers, weight the lines based on the 
 
 #### 5. Video is a sequence of images. The pipeline memorizes the images in each time step and caches the lines with a fixed size of deque data structure. I use it to weight the lanes to provide a more stable lanes. The assumption is the changes of images are continuous. 
 
-The weight scheme is based on a weighted scheme. For each time step (the index in the deque). 
-
-The most recent one get larger weight. We use softmax function for this flow. 
-
-
-The videos can be accessed via following youtube links
+The weight scheme is based on a weighted scheme. For each time step (the index in the deque). The most recent one get larger weight. We use softmax function for this flow. The videos can be accessed via following youtube links
 
 [solidWhiteRight](https://youtu.be/F173u323pXQ)
 
@@ -141,12 +140,14 @@ The videos can be accessed via following youtube links
 ### 2. Identify potential shortcomings with your current pipeline
 
 
-One potential shortcoming would be what would happen when the road has wide turns. The slopes of the lanes may change ruptly.
+One potential shortcoming would be what would happen when the road has wide turns. The slopes of the lanes may change ruptly compared to the cached lanes. The weighted or averaging lanes may be unstable.
 
-Another shortcoming could be the steepness of the road. The region of interest assumption in this work may not hold so it will introduce more variables which are not controlled in this work.
+Another shortcoming could be the steepness of the road. The region of interest assumption in this work may not hold. So it will introduce more unpredicted variables which are not considered in this work.
 
 
 ### 3. Suggest possible improvements to your pipeline
 
 
-A possible improvement would be to use curvature detection to get more smooth and continuous the line. For steep roads, we should first need to detect the region of interests.
+A possible improvement would be to use curvature detection to get more smooth and continuous the line.
+
+For steep roads, we should first need to detect the region of interests.
