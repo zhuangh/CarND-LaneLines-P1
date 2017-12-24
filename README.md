@@ -56,7 +56,7 @@ The goals / steps of this project are the following:
 [image9]: ./test_images_output/gray_challenge1.jpg "gray_chanllenge1" 
 [image10]: ./test_images_output/hsl_challenge.jpg "gray_chanllenge1" 
 [image11]: ./test_images_output/gray_challenge.jpg "gray_chanllenge" 
-[image12]: ./test_images_output/challenge1.jpg "chanllenge1" 
+[image12]: ./test_images/challenge.jpg "chanllenge" 
 [imageyc_hsl]: ./test_images_output/hsl_solidYellowCurve.jpg "SolidYellowCurve_HSL"
 [imageyc_gray]: ./test_images_output/gray_solidYellowCurve.jpg "SolidYellowCurve_Gray"
 [imageyc]: ./test_images/solidYellowCurve.jpg "SolidYellowCurve"
@@ -72,27 +72,33 @@ My pipeline consisted of steps as follows.
 
 #### 1. I converted the images to hls and get the color regions of white and yellow to the image mask. 
 
-The reason is that gray scaled image is not accurate enough to get the lanes in different light conditions compared to HLS.
-In the color selection, we set the value ranges for white and yellow. 
-
-
-Original image
-![alt text][imageyc] 
-
-From Grayscale image
-![alt text][imageyc_gray]
-
-From HSL image
-![alt text][imageyc_hsl]
-
-The HSL image can detect left lanes well.
-
+The reason is that gray scaled image is not accurate enough to get the lanes in different light conditions compared to HSL. In the color selection, we set the value ranges for white and yellow. 
 
 #### 2. To get the edges, OpenCV Canny algorithm is used. 
 
 #### 3. Use Hough transformation with the edges to get the lines.
 
 Step 2 and 3 are directly applied from Udacity course so far before the Project 1 assignment. 
+
+
+Original image
+![alt text][imageyc] 
+
+Edge detection RGB image
+![alt text][imageyc_gray]
+
+From HSL image
+![alt text][imageyc_hsl]
+
+The HSL image can detect left lanes well. Another challenging image, 
+
+Original image
+![alt text][image12] 
+Edge detection RGB image
+![alt text][image11]
+From HSL image
+![alt text][image10]
+
 
 #### 4. In order to draw a single line on the left and right lanes, I calculate the slope of each line segments. Based on the slope, we separate them into the category of left or right lane.
 
