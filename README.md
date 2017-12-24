@@ -52,14 +52,13 @@ The goals / steps of this project are the following:
 [image5]: ./test_images_output/solidYellowCurve.jpg "SolidYellowCurve"
 [image6]: ./test_images_output/solidYellowLeft.jpg "solidYellowLeft"
 [image7]: ./test_images_output/whiteCarLaneSwitch.jpg "whiteCarLaneSwitch"
-[image8]: ./test_images_output/hsl_challenge1.jpg "hsl_chanllenge1" 
-[image9]: ./test_images_output/gray_challenge1.jpg "gray_chanllenge1" 
 [image10]: ./test_images_output/hsl_challenge.jpg "gray_chanllenge1" 
 [image11]: ./test_images_output/gray_challenge.jpg "gray_chanllenge" 
 [image12]: ./test_images/challenge.jpg "chanllenge" 
 [imageyc_hsl]: ./test_images_output/hsl_solidYellowCurve.jpg "SolidYellowCurve_HSL"
 [imageyc_gray]: ./test_images_output/gray_solidYellowCurve.jpg "SolidYellowCurve_Gray"
 [imageyc]: ./test_images/solidYellowCurve.jpg "SolidYellowCurve"
+
 ---
 
 ### Reflection
